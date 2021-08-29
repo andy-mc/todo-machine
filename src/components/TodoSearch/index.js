@@ -1,7 +1,7 @@
 import React from 'react';
 
 function TodoSearch() {
-    return <h1>TodoSearch</h1>
+    return <input type="text" placeholder="Busca tu todo"></input>
 }
 
 export {TodoSearch}
