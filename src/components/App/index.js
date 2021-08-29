@@ -8,9 +8,9 @@ import {CreateTodo} from '../CreateTodo'
 
 function App() {
   const todos = [
-    {id: 1, text: 'hacer ejercicio', completed: false},
-    {id: 2, text: 'leer', completed: false},
-    {id: 3, text: 'comer sano', completed: true}
+    {_id: 1, text: 'hacer ejercicio', completed: false},
+    {_id: 2, text: 'leer', completed: false},
+    {_id: 3, text: 'comer sano', completed: true}
   ]
 
   return (  

@@ -5,11 +5,11 @@ import './Background.css';
 function Background({children}) {
   return (
     <>
-      <div class="context">
+      <div className="context">
         {children}
       </div>
-      <div class="area" >
-        <ul class="circles">
+      <div className="area" >
+        <ul className="circles">
                 <li></li>
                 <li></li>
                 <li></li>
