@@ -3,7 +3,7 @@
     width: 100%;
     position: absolute;
     top:8vh;
-    
+    z-index: 1;
 }
 
 .context h1{
