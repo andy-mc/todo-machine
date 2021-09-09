@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import './App.css';
 
 import {Background} from '../Background'
@@ -14,7 +14,7 @@ function App() {
     {_id: 3, text: 'comer sano', completed: true}
   ]
 
-  const [searchValue, setSearchValue] = React.useState('')
+  const [searchValue, setSearchValue] = useState('')
 
   const filteredTodos = todos.filter((todo) => {
     const todoText = todo.text.toLowerCase()
