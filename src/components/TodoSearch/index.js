@@ -2,11 +2,26 @@ import React from 'react';
 import './TodoSearch.css'
 
 function TodoSearch() {
-    const handleSearch = (event, aaaaa, bbbb, cccccc) => {
-        console.log('event onChage from search', event.target.value)
+    const [searchValue, setSearchValue] = React.useState('')
+    
+    const handleSearch = (event) => {
+        const searchIput = event.target.value;
+        setSearchValue(searchIput)
     }
 
-    return <input onChange={handleSearch} className="search" type="text" placeholder="Busca tu todo"></input>
+    return (
+        <>
+        <input 
+            value={searchValue} 
+            onChange={handleSearch} 
+            type="text" 
+            className="search" 
+            placeholder="Busca tu todo"
+        >
+        </input>
+        <p>{searchValue}</p>
+        </>
+    ) 
 }
 
 export {TodoSearch}
