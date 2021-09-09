@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 
 import {Background} from '../Background'
@@ -13,13 +14,22 @@ function App() {
     {_id: 3, text: 'comer sano', completed: true}
   ]
 
+  const [searchValue, setSearchValue] = React.useState('')
+
+  const filteredTodos = todos.filter((todo) => {
+    const todoText = todo.text.toLowerCase()
+    const searchValueText = searchValue.toLowerCase()
+
+    return todoText.includes(searchValueText)
+  })
+
   return (  
     <Background>
       <div className="container">
         <div className="canvas">
           <TodoCounter />
-          <TodoSearch />
-          <TodoList todos={todos} />
+          <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+          <TodoList todos={filteredTodos} />
           <CreateTodo />
         </div>
       </div>
