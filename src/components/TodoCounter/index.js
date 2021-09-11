@@ -1,7 +1,7 @@
 import './TodoCounter.css'
 
-function TodoCounter() {
-    return <p className="counter">Has completado 1 de 3 todos</p>
+function TodoCounter({completedTodos, totalTodos}) {
+    return <p className="counter">Has completado {completedTodos} de {totalTodos} todos</p>
 }
 
 export {TodoCounter}
