@@ -28,13 +28,9 @@ function App() {
   })
 
   const onComplete = (todo_id) => {
-    const newTodos = todos.map((todo) => {
-      if(todo._id === todo_id){
-        console.log('todo:', !!!todo.completed)
-        todo.completed = !todo.completed
-      }
-      return todo
-    })
+    const newTodos = [...todos]
+    const todoIndex = todos.findIndex((todo) => todo._id === todo_id)
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed
     setTodos(newTodos)
   }
 
