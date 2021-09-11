@@ -33,7 +33,7 @@ function App() {
         <div className="canvas">
           <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
           <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-          <TodoList todos={filteredTodos} />
+          <TodoList todos={filteredTodos} setTodos={setTodos} />
           <CreateTodo />
         </div>
       </div>
