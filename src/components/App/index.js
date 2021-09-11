@@ -27,14 +27,14 @@ function App() {
     return todoText.includes(searchValueText)
   })
 
-  const onComplete = (todo_id) => {
+  const completeTodo = (todo_id) => {
     const newTodos = [...todos]
     const todoIndex = todos.findIndex((todo) => todo._id === todo_id)
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed
     setTodos(newTodos)
   }
 
-  const onDelete = (todo_id) => {
+  const deleteTodo = (todo_id) => {
     const newTodos = todos.filter((todo) => {
       return todo._id !== todo_id
     })     
@@ -49,8 +49,8 @@ function App() {
           <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
           <TodoList 
             todos={filteredTodos} 
-            onComplete={onComplete} 
-            onDelete={onDelete} 
+            onComplete={completeTodo} 
+            onDelete={deleteTodo} 
           />
           <CreateTodo />
         </div>
