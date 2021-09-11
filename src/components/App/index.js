@@ -8,13 +8,14 @@ import {TodoList} from '../TodoList'
 import {CreateTodo} from '../CreateTodo'
 
 function App() {
-  const todos = [
+  const initTodos = [
     {_id: 1, text: 'hacer ejercicio', completed: false},
     {_id: 2, text: 'leer', completed: false},
     {_id: 3, text: 'comer sano', completed: true}
   ]
 
   const [searchValue, setSearchValue] = useState('')
+  const [todos, setTodos] = useState(initTodos)
 
   const filteredTodos = todos.filter((todo) => {
     const todoText = todo.text.toLowerCase()
@@ -29,7 +30,7 @@ function App() {
         <div className="canvas">
           <TodoCounter />
           <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-          <TodoList todos={filteredTodos} />
+          <TodoList todos={todos} />
           <CreateTodo />
         </div>
       </div>
