@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppUI } from './AppUI';
 
 const initTodos = [
@@ -7,6 +7,7 @@ const initTodos = [
   {_id: 3, text: 'comer sano', completed: true}
 ]
 
+// this is clean beacuase es pure state an logic withouth UI layout/structure
 function App() { 
   // all logic is in main App dad component
   const [count, setCount] = useState(0);
@@ -46,6 +47,8 @@ function App() {
   }
   
   // All UI is in a different component so we separate business logic from view controller from view
+  // visualize when your apps grows this is not mantainable
+  // this can be clean up using a provider
   return (  
     < AppUI
       completedTodos = {completedTodos}

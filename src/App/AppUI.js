@@ -6,7 +6,10 @@ import {TodoSearch} from '../TodoSearch'
 import {TodoList} from '../TodoList'
 import {CreateTodo} from '../CreateTodo'
 
+// this is clean because is pure UI withOut state
 // how it can be cleanUp all this props are too much
+// visualize when your apps grows this is not mantainable
+// this can be clean up using a provider
 function AppUI({
     completedTodos, 
     totalTodos,
@@ -17,7 +20,8 @@ function AppUI({
     deleteTodo, 
     increaseCounter
   }) { 
-  return (  
+  return (
+    // this is clean because is pure UI structure with a logic in a different file
     <Background>
       <div className="container">
         <div className="canvas">
