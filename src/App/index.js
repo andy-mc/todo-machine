@@ -1,11 +1,5 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-
-import {Background} from '../Background'
-import {TodoCounter} from '../TodoCounter'
-import {TodoSearch} from '../TodoSearch'
-import {TodoList} from '../TodoList'
-import {CreateTodo} from '../CreateTodo'
+import { AppUI } from './AppUI';
 
 const initTodos = [
   {_id: 1, text: 'hacer ejercicio', completed: false},
@@ -14,6 +8,7 @@ const initTodos = [
 ]
 
 function App() { 
+  // all logic is in main App dad component
   const [count, setCount] = useState(0);
   const [todos, setTodos] = useState(initTodos)
   const [searchValue, setSearchValue] = useState('')
@@ -21,7 +16,6 @@ function App() {
   useEffect(() => {
     document.title = `${count} :D`;
   }, [count]);
-
 
   const completedTodos = todos.filter((todo) => !!todo.completed).length
   const totalTodos = todos.length
@@ -50,26 +44,20 @@ function App() {
   const increaseCounter = () => {
     setCount(count + 1)
   }
-
+  
+  // All UI is in a different component so we separate business logic from view controller from view
   return (  
-    <Background>
-      <div className="container">
-        <div className="canvas">
-          <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
-          <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-          <TodoList 
-            todos={filteredTodos} 
-            onComplete={completeTodo} 
-            onDelete={deleteTodo} 
-          />
-          <div className="footer">
-            <CreateTodo handleClick={increaseCounter} />
-            <CreateTodo />
-          </div>
-        </div>
-      </div>
-    </Background>
+    < AppUI
+      completedTodos = {completedTodos}
+      totalTodos = {totalTodos}
+      searchValue = {searchValue}
+      setSearchValue = {setSearchValue}
+      filteredTodos = {filteredTodos}
+      completeTodo = {completeTodo}
+      deleteTodo = {deleteTodo}
+      increaseCounter = {increaseCounter}
+    />
   );
 }
 
-export default App;
+export {App};
