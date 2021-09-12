@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 
 import {Background} from '../Background'
@@ -14,8 +14,14 @@ const initTodos = [
 ]
 
 function App() { 
+  const [count, setCount] = useState(0);
   const [todos, setTodos] = useState(initTodos)
   const [searchValue, setSearchValue] = useState('')
+
+  useEffect(() => {
+    document.title = `${count} :D`;
+  }, [count]);
+
 
   const completedTodos = todos.filter((todo) => !!todo.completed).length
   const totalTodos = todos.length
@@ -41,6 +47,10 @@ function App() {
     setTodos(newTodos)
   }
 
+  const increaseCounter = () => {
+    setCount(count + 1)
+  }
+
   return (  
     <Background>
       <div className="container">
@@ -53,7 +63,7 @@ function App() {
             onDelete={deleteTodo} 
           />
           <div className="footer">
-            <CreateTodo />
+            <CreateTodo handleClick={increaseCounter} />
             <CreateTodo />
           </div>
         </div>

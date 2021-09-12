@@ -1,14 +1,14 @@
 import React from 'react';
 import './CreateTodo.css'
 
-function CreateTodo() {
+function CreateTodo({handleClick}) {
     function onClickButton () {
         alert('tatata !!')
     }
 
     return <button 
         className="CreateTodoButton"
-        onClick={onClickButton}
+        onClick={handleClick ? handleClick: onClickButton}
     >
         +
     </button>
