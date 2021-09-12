@@ -52,7 +52,10 @@ function App() {
             onComplete={completeTodo} 
             onDelete={deleteTodo} 
           />
-          <CreateTodo />
+          <div className="footer">
+            <CreateTodo />
+            <CreateTodo />
+          </div>
         </div>
       </div>
     </Background>
