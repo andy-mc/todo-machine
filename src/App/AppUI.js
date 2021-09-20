@@ -11,6 +11,8 @@ import {CreateTodo} from '../CreateTodo'
 // visualize when your apps grows this is not mantainable
 // this can be clean up using a provider
 function AppUI({
+    loading,
+    errors,
     completedTodos, 
     totalTodos,
     searchValue,
@@ -27,11 +29,16 @@ function AppUI({
         <div className="canvas">
           <TodoCounter completedTodos={completedTodos} totalTodos={totalTodos} />
           <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-          <TodoList 
-            todos={filteredTodos} 
-            onComplete={completeTodo} 
-            onDelete={deleteTodo} 
-          />
+          {loading && errors.length === 0 && <p><br/><br/>Estamos cargando datos</p>}
+          {!loading && errors.length > 0 && <p><br/><br/>ah ocurrido un Error !!</p>}
+          {!loading && errors.length === 0 && totalTodos === 0 && <p><br/><br/>Por favor cree su primer TODO !!</p>}
+          {!loading && errors.length === 0 && totalTodos > 0 && 
+            <TodoList 
+              todos={filteredTodos} 
+              onComplete={completeTodo} 
+              onDelete={deleteTodo} 
+            />
+          }
           <div className="footer">
             <CreateTodo handleClick={increaseCounter} />
             <CreateTodo />

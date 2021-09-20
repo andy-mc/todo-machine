@@ -3,33 +3,60 @@ import { AppUI } from './AppUI';
 
 
 function useLocalStorage(itemKey, initValue) {
-  const localStorageValue = localStorage.getItem(itemKey)
+  const [errors, setErrors] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [storageState, setStorageState] = useState(initValue)
 
-  let localStorageSavedValue
-  if(!localStorageValue) {
-    localStorage.setItem(itemKey, JSON.stringify(initValue))
-    localStorageSavedValue = initValue
-  } else {
-    localStorageSavedValue = JSON.parse(localStorageValue)
-  }
-
-  const [storageState, setStorageState] = useState(localStorageSavedValue)
+  React.useEffect(() => {
+    setTimeout(()=>{
+      try {
+        const localStorageValue = localStorage.getItem(itemKey)
+    
+        let localStorageSavedValue
+        if(!localStorageValue) {
+          localStorage.setItem(itemKey, JSON.stringify(initValue))
+          localStorageSavedValue = initValue
+        } else {
+          localStorageSavedValue = JSON.parse(localStorageValue)
+        }
+        
+        setStorageState(localStorageSavedValue)
+        setLoading(false)
+      } catch (error) {
+        setErrors([error])
+        setLoading(false)
+      }
+    }, 2000)
+  }, [itemKey, initValue])
 
   const saveStorageState = (values) => {
-    const valuesString = JSON.stringify(values)
-    localStorage.setItem(itemKey, valuesString)
-    setStorageState(values)
+    try {
+      const valuesString = JSON.stringify(values)
+      localStorage.setItem(itemKey, valuesString)
+      setStorageState(values)
+    } catch (error) {
+      setErrors([error])
+      setLoading(false)
+    }
   }
 
-  return [
+  return {
     storageState,
-    saveStorageState
-  ]
+    saveStorageState,
+    loading,
+    errors
+  }
 }
 
 // this is clean beacuase es pure state an logic withouth UI layout/structure
 function App() { 
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', [])
+  const {
+    storageState: todos, 
+    saveStorageState: saveTodos,
+    loading,
+    errors
+  } = useLocalStorage('TODOS_V1', [])
+
   const [count, setCount] = useState(0);
   const [searchValue, setSearchValue] = useState('')
 
@@ -70,6 +97,8 @@ function App() {
   // this can be clean up using a provider
   return (  
     < AppUI
+      loading = {loading}
+      errors = {errors}
       completedTodos = {completedTodos}
       totalTodos = {totalTodos}
       searchValue = {searchValue}
