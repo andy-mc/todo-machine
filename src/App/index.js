@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { AppUI } from './AppUI';
 
-const initTodos = [
-  {_id: 1, text: 'hacer ejercicio', completed: false},
-  {_id: 2, text: 'leer', completed: false},
-  {_id: 3, text: 'comer sano', completed: true}
-]
-
 // this is clean beacuase es pure state an logic withouth UI layout/structure
 function App() { 
-  // all logic is in main App dad component
+  const localStorageTodos = localStorage.getItem('TODOS_V1')
+
+  let localTodos
+  if(!localStorageTodos) {
+    localStorage.setItem('TODOS_V1', '[]')
+    localTodos = []
+  } else {
+    localTodos = JSON.parse(localStorageTodos)
+  }
+
+  const [todos, setTodos] = useState(localTodos)
   const [count, setCount] = useState(0);
-  const [todos, setTodos] = useState(initTodos)
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
@@ -28,18 +31,24 @@ function App() {
     return todoText.includes(searchValueText)
   })
 
+  const saveTodos = (newTodos) => {
+    const newTodosString = JSON.stringify(newTodos)
+    localStorage.setItem('TODOS_V1', newTodosString)
+    setTodos(newTodos)
+  }
+
   const completeTodo = (todo_id) => {
     const newTodos = [...todos]
     const todoIndex = todos.findIndex((todo) => todo._id === todo_id)
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed
-    setTodos(newTodos)
+    saveTodos(newTodos)
   }
 
   const deleteTodo = (todo_id) => {
     const newTodos = todos.filter((todo) => {
       return todo._id !== todo_id
-    })     
-    setTodos(newTodos)
+    })
+    saveTodos(newTodos)
   }
 
   const increaseCounter = () => {
