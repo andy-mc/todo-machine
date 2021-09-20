@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { AppUI } from './AppUI';
 
-// this is clean beacuase es pure state an logic withouth UI layout/structure
-function App() { 
-  const localStorageTodos = localStorage.getItem('TODOS_V1')
 
-  let localTodos
-  if(!localStorageTodos) {
-    localStorage.setItem('TODOS_V1', '[]')
-    localTodos = []
+function useLocalStorage(itemKey, initValue) {
+  const localStorageValue = localStorage.getItem(itemKey)
+
+  let localStorageSavedValue
+  if(!localStorageValue) {
+    localStorage.setItem(itemKey, JSON.stringify(initValue))
+    localStorageSavedValue = initValue
   } else {
-    localTodos = JSON.parse(localStorageTodos)
+    localStorageSavedValue = JSON.parse(localStorageValue)
   }
 
-  const [todos, setTodos] = useState(localTodos)
+  const [storageState, setStorageState] = useState(localStorageSavedValue)
+
+  const saveStorageState = (values) => {
+    const valuesString = JSON.stringify(values)
+    localStorage.setItem(itemKey, valuesString)
+    setStorageState(values)
+  }
+
+  return [
+    storageState,
+    saveStorageState
+  ]
+}
+
+// this is clean beacuase es pure state an logic withouth UI layout/structure
+function App() { 
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', [])
   const [count, setCount] = useState(0);
   const [searchValue, setSearchValue] = useState('')
 
@@ -30,13 +46,7 @@ function App() {
 
     return todoText.includes(searchValueText)
   })
-
-  const saveTodos = (newTodos) => {
-    const newTodosString = JSON.stringify(newTodos)
-    localStorage.setItem('TODOS_V1', newTodosString)
-    setTodos(newTodos)
-  }
-
+  
   const completeTodo = (todo_id) => {
     const newTodos = [...todos]
     const todoIndex = todos.findIndex((todo) => todo._id === todo_id)
