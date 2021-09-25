@@ -1,17 +1,19 @@
 import React from 'react';
-import './CreateTodo.css'
+import {TodoConsumer} from '../TodoContext'
+import './CreateTodo.css';
 
-function CreateTodo({handleClick}) {
-    function onClickButton () {
-        alert('tatata !!')
-    }
+function CreateTodo({counter}) {
+  function onClickButton () {
+    alert('tatata !!')
+  }
 
-    return <button 
-        className="CreateTodoButton"
-        onClick={handleClick ? handleClick: onClickButton}
-    >
+  return <TodoConsumer>
+    {({increaseCounter}) => (
+      <button className="CreateTodoButton" onClick={counter ? increaseCounter: onClickButton}>
         +
-    </button>
+      </button>
+    )}
+  </TodoConsumer>
 }
 
 export {CreateTodo}

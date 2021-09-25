@@ -1,15 +1,20 @@
 import React from 'react';
+import {TodoConsumer} from '../TodoContext'
 import {TodoItem} from '../TodoItem';
 
-function TodoList({todos, onComplete, onDelete}) {
-    return todos.map((todo) => (
-      <TodoItem 
-        key={todo._id} 
-        todo={todo} 
-        onComplete={()=>{onComplete(todo._id)}} 
-        onDelete={()=>{onDelete(todo._id)}} 
-      />
-    ))
+function TodoList() {
+  return <TodoConsumer>
+    {({filteredTodos, completeTodo, deleteTodo}) => (
+      filteredTodos.map((todo) => (
+        <TodoItem 
+          key={todo._id} 
+          todo={todo} 
+          onComplete={()=>{completeTodo(todo._id)}} 
+          onDelete={()=>{deleteTodo(todo._id)}} 
+        />
+      ))
+    )}
+  </TodoConsumer>   
 }
 
 export {TodoList}
