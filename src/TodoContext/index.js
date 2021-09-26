@@ -35,6 +35,13 @@ function TodoProvider(props) {
         newTodos[todoIndex].completed = !newTodos[todoIndex].completed
         saveTodos(newTodos)
       }
+
+      const createTodo = (todo) => {
+        todo._id = todos.length + 1
+        todo.completed = false
+        
+        saveTodos([...todos, todo])
+      }
     
       const deleteTodo = (todo_id) => {
         const newTodos = todos.filter((todo) => {
@@ -58,6 +65,7 @@ function TodoProvider(props) {
             searchValue,
             setSearchValue,
             completeTodo,
+            createTodo,
             deleteTodo,
             increaseCounter,
             showModal, 

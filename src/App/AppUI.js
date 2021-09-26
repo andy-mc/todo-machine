@@ -8,6 +8,7 @@ import {TodoList} from '../TodoList'
 import {CreateTodo} from '../CreateTodo'
 import {TodoContext} from '../TodoContext'
 import {Modal} from '../Modal'
+import {TodoForm} from '../TodoForm'
 
 // this is clean because is pure UI withOut state
 // how it can be cleanUp all this props are too much
@@ -28,7 +29,7 @@ function AppUI() {
       <TodoList />}
       {showModal && (
         <Modal>
-          <p>Hola Portal</p>
+          <TodoForm />
         </Modal>
       )}
       <div className="footer">
