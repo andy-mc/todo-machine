@@ -8,7 +8,6 @@ function TodoSearch() {
       {({searchValue, setSearchValue}) => {
         const handleSearch = (event) => {
             const searchIput = event.target.value;
-            console.log('searchIput:', searchIput)
             setSearchValue(searchIput)
         }
 
