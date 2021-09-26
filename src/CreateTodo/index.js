@@ -1,19 +1,19 @@
 import React from 'react';
-import {TodoConsumer} from '../TodoContext'
+import {TodoContext} from '../TodoContext'
 import './CreateTodo.css';
 
 function CreateTodo({counter}) {
+  const {increaseCounter} = React.useContext(TodoContext) 
+
   function onClickButton () {
     alert('tatata !!')
   }
-
-  return <TodoConsumer>
-    {({increaseCounter}) => (
-      <button className="CreateTodoButton" onClick={counter ? increaseCounter: onClickButton}>
-        +
-      </button>
-    )}
-  </TodoConsumer>
+  
+  return (
+    <button className="CreateTodoButton" onClick={counter ? increaseCounter: onClickButton}>
+      +
+    </button>
+  )
 }
 
 export {CreateTodo}

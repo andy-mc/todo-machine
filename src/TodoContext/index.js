@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useLocalStorage} from './useLocalStorage';
 
-const {Provider, Consumer} = React.createContext()
+const TodoContext = React.createContext()
 
 function TodoProvider(props) {
     const {
@@ -48,7 +48,7 @@ function TodoProvider(props) {
       
 
     return (
-        <Provider value={{
+        <TodoContext.Provider value={{
             loading,
             errors,
             filteredTodos,
@@ -61,8 +61,8 @@ function TodoProvider(props) {
             increaseCounter
         }}>
             {props.children}
-        </Provider>
+        </TodoContext.Provider>
     )
 }
-
-export {TodoProvider, Consumer as TodoConsumer}
+const Consumer =  TodoContext.Consumer;
+export {TodoProvider, TodoContext, Consumer as TodoConsumer}
