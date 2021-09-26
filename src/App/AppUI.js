@@ -18,19 +18,16 @@ function AppUI() {
   return (
     // this is clean because is pure UI structure with a logic in a different file
     <Background>
-      <div className="container">
-        <div className="canvas">
-          <TodoCounter />
-          <TodoSearch />
-            {loading && errors.length === 0 && <p><br/><br/>Estamos cargando datos</p>}
-            {!loading && errors.length > 0 && <p><br/><br/>ah ocurrido un Error !!</p>}
-            {!loading && errors.length === 0 && totalTodos === 0 && <p><br/><br/>Por favor cree su primer TODO !!</p>}
-            {!loading && errors.length === 0 && totalTodos > 0 && <TodoList />}
-          <div className="footer">
-            <CreateTodo counter />
-            <CreateTodo />
-          </div>
-        </div>
+      <TodoCounter />
+      <TodoSearch />
+      {loading && errors.length === 0 && <p><br/><br/>Estamos cargando datos</p>}
+      {!loading && errors.length > 0 && <p><br/><br/>ah ocurrido un Error !!</p>}
+      {!loading && errors.length === 0 && totalTodos === 0 && <p><br/><br/>Por favor cree su primer TODO !!</p>}
+      {!loading && errors.length === 0 && totalTodos > 0 && 
+      <TodoList />}
+      <div className="footer">
+        <CreateTodo counter />
+        <CreateTodo />
       </div>
     </Background>
   );

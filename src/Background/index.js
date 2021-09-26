@@ -1,12 +1,15 @@
 import React from 'react';
-
 import './Background.css';
 
 function Background({children}) {
   return (
     <>
       <div className="context">
-        {children}
+        <div className="container">
+          <div className="canvas">
+            {children}
+          </div>
+        </div>
       </div>
       <div className="area" >
         <ul className="circles">
