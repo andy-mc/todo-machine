@@ -13,6 +13,7 @@ function TodoProvider(props) {
     
       const [count, setCount] = useState(0);
       const [searchValue, setSearchValue] = useState('')
+      const [showModal, setShowModal] = useState(false);
     
       useEffect(() => {
         document.title = `${count} :D`;
@@ -58,7 +59,9 @@ function TodoProvider(props) {
             setSearchValue,
             completeTodo,
             deleteTodo,
-            increaseCounter
+            increaseCounter,
+            showModal, 
+            setShowModal
         }}>
             {props.children}
         </TodoContext.Provider>

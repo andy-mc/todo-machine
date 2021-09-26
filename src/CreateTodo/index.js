@@ -3,10 +3,12 @@ import {TodoContext} from '../TodoContext'
 import './CreateTodo.css';
 
 function CreateTodo({counter}) {
-  const {increaseCounter} = React.useContext(TodoContext) 
+  const {increaseCounter, setShowModal} = React.useContext(TodoContext) 
 
   function onClickButton () {
-    alert('tatata !!')
+    setShowModal((showModal) => {
+      return !showModal
+    })
   }
   
   return (
