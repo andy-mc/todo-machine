@@ -4,8 +4,10 @@ function useLocalStorage(itemKey, initValue) {
     const [errors, setErrors] = useState([])
     const [loading, setLoading] = useState(true)
     const [storageState, setStorageState] = useState(initValue)
+    const [syncStorage, setSyncStorage] = useState(false)
   
     React.useEffect(() => {
+      !syncStorage &&
       setTimeout(()=>{
         try {
           const localStorageValue = localStorage.getItem(itemKey)
@@ -20,12 +22,18 @@ function useLocalStorage(itemKey, initValue) {
           
           setStorageState(localStorageSavedValue)
           setLoading(false)
+          setSyncStorage(true)
         } catch (error) {
           setErrors([error])
           setLoading(false)
         }
       }, 2000)
-    }, [itemKey, initValue])
+    }, [syncStorage])
+
+    const syncLocalStorage = () => {
+      setLoading(true)
+      setSyncStorage(false)
+    }
   
     const saveStorageState = (values) => {
       try {
@@ -42,6 +50,7 @@ function useLocalStorage(itemKey, initValue) {
       storageState,
       saveStorageState,
       loading,
+      syncLocalStorage,
       errors
     }
   }

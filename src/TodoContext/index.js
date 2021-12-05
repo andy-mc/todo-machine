@@ -8,6 +8,7 @@ function TodoProvider(props) {
         storageState: todos, 
         saveStorageState: saveTodos,
         loading,
+        syncLocalStorage: syncTodos,
         errors
       } = useLocalStorage('TODOS_V1', [])
     
@@ -69,7 +70,8 @@ function TodoProvider(props) {
             deleteTodo,
             increaseCounter,
             showModal, 
-            setShowModal
+            setShowModal,
+            syncTodos
         }}>
             {props.children}
         </TodoContext.Provider>
