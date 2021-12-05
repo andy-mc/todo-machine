@@ -3,7 +3,7 @@ import './App.css';
 
 import {Background} from '../Background'
 import {ChangeAlert} from '../ChangeAlert'
-import {CreateTodo} from '../CreateTodo'
+import {PlusButton} from '../PlusButton'
 import {Modal} from '../Modal'
 import {TodoContext} from '../TodoContext'
 import {TodoCounter} from '../TodoCounter'
@@ -24,12 +24,14 @@ function AppUI() {
     deleteTodo,
     errors, 
     filteredTodos, 
+    increaseCounter, 
     loading, 
     searchValue, 
     setSearchValue,
     showModal,
+    showModalHandler,
     syncTodos, 
-    totalTodos
+    totalTodos,
   } = React.useContext(TodoContext) 
   
   return (
@@ -53,7 +55,7 @@ function AppUI() {
         ))}
       </TodoList>
       }
-      
+
       {showModal &&
         <Modal>
           <TodoForm />
@@ -61,8 +63,8 @@ function AppUI() {
       }
 
       <div className="footer">
-        <CreateTodo counter />
-        <CreateTodo />
+        <PlusButton action={increaseCounter} />
+        <PlusButton action={() => showModalHandler(true)} />
       </div>
 
       <ChangeAlert syncTodos={syncTodos} />

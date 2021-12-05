@@ -3,7 +3,7 @@ import {TodoContext} from '../TodoContext'
 import './TodoForm.css'
 
 function TodoForm(){
-  const {setShowModal, createTodo} = React.useContext(TodoContext)
+  const {showModalHandler, createTodo} = React.useContext(TodoContext)
   const [textTodo, setTextTodo] = useState('')
   
   function handleTextArea(event) {
@@ -12,13 +12,13 @@ function TodoForm(){
   }
 
   function closeModal() {
-    setShowModal(false)
+    showModalHandler(false)
   }
 
   function handleSubmit(event) {
     event.preventDefault()
     createTodo({text: textTodo})
-    setShowModal(false)
+    showModalHandler(false)
   }
 
   return <form onSubmit={handleSubmit}>
