@@ -1,19 +1,23 @@
 import React from 'react';
 import {withStorageListener} from './withStorageListener'
+import './ChangeAlert.css'
 
-function ChangeAlert({storageChange, updateStorage}) {
-  
-  if (storageChange) {
+function ChangeAlert({ storageChange, updateStorage}) {
+  if (true) {
     return (
-      <>
-      <p>hola mundo</p>
-      <button
-        onClick={updateStorage}
-      >
-        refresh
-      </button>
-      </>
-    )
+      <div className="ChangeAlert-bg">
+        <div className="ChangeAlert-container">
+          <p>Parece que cambiaste tus TODOs en otra pestaña o ventana del navegador.</p>
+          <p>¿Quieres sincronizar tus TODOs?</p>
+          <button
+            className="TodoForm-button TodoForm-button--add"
+            onClick={updateStorage}
+          >
+            Yes!
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return <></>
