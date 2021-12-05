@@ -2,14 +2,16 @@ import React from 'react';
 import './App.css';
 
 import {Background} from '../Background'
-import {TodoCounter} from '../TodoCounter'
-import {TodoSearch} from '../TodoSearch'
-import {TodoList} from '../TodoList'
-import {CreateTodo} from '../CreateTodo'
-import {TodoContext} from '../TodoContext'
-import {Modal} from '../Modal'
-import {TodoForm} from '../TodoForm'
 import {ChangeAlert} from '../ChangeAlert'
+import {CreateTodo} from '../CreateTodo'
+import {Modal} from '../Modal'
+import {TodoContext} from '../TodoContext'
+import {TodoCounter} from '../TodoCounter'
+import {TodoForm} from '../TodoForm'
+import {TodoItem} from '../TodoItem';
+import {TodoList} from '../TodoList'
+import {TodoSearch} from '../TodoSearch'
+
 
 // this is clean because is pure UI withOut state
 // how it can be cleanUp all this props are too much
@@ -17,14 +19,17 @@ import {ChangeAlert} from '../ChangeAlert'
 // this can be clean up using a provider
 function AppUI() {
   const {
+    completeTodo, 
     completedTodos, 
+    deleteTodo,
     errors, 
+    filteredTodos, 
     loading, 
+    searchValue, 
+    setSearchValue,
     showModal,
     syncTodos, 
-    totalTodos,
-    searchValue, 
-    setSearchValue
+    totalTodos
   } = React.useContext(TodoContext) 
   
   return (
@@ -37,9 +42,18 @@ function AppUI() {
       {!loading && errors.length > 0 && <p><br/><br/>ah ocurrido un Error !!</p>}
       {!loading && errors.length === 0 && totalTodos === 0 && <p><br/><br/>Por favor cree su primer TODO !!</p>}
       {!loading && errors.length === 0 && totalTodos > 0 &&
-      <TodoList />
+      <TodoList>
+        {filteredTodos.map((todo) => (
+          <TodoItem 
+            key={todo._id} 
+            todo={todo} 
+            onComplete={()=>{completeTodo(todo._id)}} 
+            onDelete={()=>{deleteTodo(todo._id)}} 
+          />
+        ))}
+      </TodoList>
       }
-
+      
       {showModal &&
         <Modal>
           <TodoForm />
@@ -50,7 +64,7 @@ function AppUI() {
         <CreateTodo counter />
         <CreateTodo />
       </div>
-      
+
       <ChangeAlert syncTodos={syncTodos} />
     </Background>
   );
