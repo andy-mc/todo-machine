@@ -1,7 +1,6 @@
 import React from 'react';
 
-const withStorageListener = (Wrapped) => {
-  return (props) => {
+const useStorageListener = (sync) => {
     const [storageChange, setStorageChange] = React.useState(false)
 
     window.addEventListener('storage', (change) => {
@@ -12,15 +11,13 @@ const withStorageListener = (Wrapped) => {
 
     function updateStorage() {
       setStorageChange(false)
-      props.syncTodos()
+      sync()
     }
 
-    return (
-      <>
-        <Wrapped storageChange={storageChange} updateStorage={updateStorage} />
-      </>
-    )
-  }
+    return {
+      storageChange,
+      updateStorage
+    }
 }
 
-export {withStorageListener}
+export {useStorageListener}
