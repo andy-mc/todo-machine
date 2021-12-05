@@ -1,31 +1,18 @@
-import React from 'react';
-import {TodoConsumer} from '../TodoContext'
 import './TodoSearch.css'
 
-function TodoSearch() {    
-  return (
-    <TodoConsumer>
-      {({searchValue, setSearchValue}) => {
-        const handleSearch = (event) => {
-            const searchIput = event.target.value;
-            setSearchValue(searchIput)
-        }
+function TodoSearch({searchValue, setSearchValue}) {
+  const handleSearch = event => setSearchValue(event.target.value);
 
-        return (
-            <>
-            <input 
-                value={searchValue} 
-                onChange={handleSearch} 
-                type="text" 
-                className="search" 
-                placeholder="Busca tu todo"
-            >
-            </input>
-            </>
-        )
-      }}
-    </TodoConsumer>
-  ) 
+  return (
+      <input 
+        value={searchValue} 
+        onChange={handleSearch} 
+        type="text" 
+        className="search" 
+        placeholder="Busca tu TODO !!"
+      >
+      </input>
+  )
 }
 
 export {TodoSearch}
