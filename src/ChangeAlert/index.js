@@ -3,7 +3,7 @@ import {withStorageListener} from './withStorageListener'
 import './ChangeAlert.css'
 
 function ChangeAlert({ storageChange, updateStorage}) {
-  if (true) {
+  if (storageChange) {
     return (
       <div className="ChangeAlert-bg">
         <div className="ChangeAlert-container">
