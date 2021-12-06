@@ -1,15 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useLocalStorage} from './useLocalStorage';
 
-const TodoContext = React.createContext()
-
-function TodoProvider(props) {
+export function useTodos() {
   const {
     storageState: todos, 
     saveStorageState: saveTodos,
-    loading,
     syncLocalStorage: syncTodos,
-    errors
+    errors,
+    loading,
   } = useLocalStorage('TODOS_V1', [])
 
   const [count, setCount] = useState(0);
@@ -59,27 +57,20 @@ function TodoProvider(props) {
     setShowModal(modal_state)
   }
 
-  return (
-      <TodoContext.Provider value={{
-        completeTodo,
-        completedTodos,
-        createTodo,
-        deleteTodo,
-        errors,
-        filteredTodos,
-        increaseCounter,
-        loading,
-        searchValue,
-        setSearchValue,
-        showModal, 
-        showModalHandler,
-        syncTodos,
-        totalTodos,
-      }}>
-          {props.children}
-      </TodoContext.Provider>
-  )
+  return {
+    completeTodo,
+    completedTodos,
+    createTodo,
+    deleteTodo,
+    errors,
+    filteredTodos,
+    increaseCounter,
+    loading,
+    searchValue,
+    setSearchValue,
+    showModal, 
+    showModalHandler,
+    syncTodos,
+    totalTodos,
+  }
 }
-
-const Consumer =  TodoContext.Consumer;
-export {TodoProvider, TodoContext, Consumer as TodoConsumer}

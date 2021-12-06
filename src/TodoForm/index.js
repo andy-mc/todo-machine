@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import {TodoContext} from '../TodoContext'
 import './TodoForm.css'
 
-function TodoForm(){
-  const {showModalHandler, createTodo} = React.useContext(TodoContext)
+function TodoForm({showModalHandler, createTodo}){
   const [textTodo, setTextTodo] = useState('')
   
   function handleTextArea(event) {
@@ -21,18 +19,20 @@ function TodoForm(){
     showModalHandler(false)
   }
 
-  return <form onSubmit={handleSubmit}>
-    <label>Escribe tu nuevo TODO !!</label>
-    <textarea 
-      value={textTodo}
-      onChange={handleTextArea} 
-      placeholder='Escribe tu nuevo TODO !!'
-    />
-    <div className="TodoForm-buttonContainer">
-      <button type="buttom" onClick={closeModal} className="TodoForm-button TodoForm-button--cancel">Cerrar</button>
-      <button type="submit" className="TodoForm-button TodoForm-button--add">Crear</button>
-    </div>
-  </form>
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>Escribe tu nuevo TODO !!</label>
+      <textarea 
+        value={textTodo}
+        onChange={handleTextArea} 
+        placeholder='Escribe tu nuevo TODO !!'
+      />
+      <div className="TodoForm-buttonContainer">
+        <button type="buttom" onClick={closeModal} className="TodoForm-button TodoForm-button--cancel">Cerrar</button>
+        <button type="submit" className="TodoForm-button TodoForm-button--add">Crear</button>
+      </div>
+    </form>
+  ) 
 }
 
 export {TodoForm}
