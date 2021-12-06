@@ -47,11 +47,11 @@ function useLocalStorage(itemKey, initValue) {
     }
   
     return {
-      storageState,
-      saveStorageState,
+      errors,
       loading,
+      saveStorageState,
+      storageState,
       syncLocalStorage,
-      errors
     }
   }
 
